@@ -56,6 +56,10 @@ main_page_head = '''
             top: 0;
             background-color: white;
         }
+        // This will allow the popover to be the same width as the tile.
+        .popover{
+            max-width: 100%; /* Max Width of the popover (depending on the container!) */
+        }
     </style>
     <script type="text/javascript" charset="utf-8">
         // Pause the video when the modal is closed
@@ -81,6 +85,10 @@ main_page_head = '''
             $(this).next("div").show("fast", showNext);
           });
         });
+        // popover box to display the movie information such as title, rating and storyline.It will be attached to an Info button.
+        $(document).ready(function(){
+        $('[data-toggle="popover"]').popover({placement:"top"});   
+});
     </script>
 </head>
 '''
@@ -107,7 +115,7 @@ main_page_content = '''
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
+            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers - David's Favorites!</a>
           </div>
         </div>
       </div>
@@ -121,10 +129,11 @@ main_page_content = '''
 
 
 # A single movie entry html template
+#contains a popover box to display the movie information such as title, rating and storyline.It will be attached to an Info button.
 movie_tile_content = '''
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer" >
     <img src="{poster_image_url}" width="220" height="342">
-    <h2>{movie_title}</h2>
+    <h2>{movie_title}</h2><button type="button" class="btn btn-info btn-xs" title="{movie_title} - {movie_rating}" data-toggle="popover" data-trigger="hover" data-html="true" data-content= "{movie_storyline}<br /><br />(Click Info or Poster image to play the movie trailer.)">Info</button>
 </div>
 '''
 
@@ -145,7 +154,9 @@ def create_movie_tiles_content(movies):
         content += movie_tile_content.format(
             movie_title=movie.title,
             poster_image_url=movie.poster_image_url,
-            trailer_youtube_id=trailer_youtube_id
+            trailer_youtube_id=trailer_youtube_id,
+            movie_storyline=movie.storyline,
+            movie_rating = movie.rating
         )
     return content
 
@@ -165,3 +176,5 @@ def open_movies_page(movies):
     # open the output file in the browser (in a new tab, if possible)
     url = os.path.abspath(output_file.name)
     webbrowser.open('file://' + url, new=2)
+    
+

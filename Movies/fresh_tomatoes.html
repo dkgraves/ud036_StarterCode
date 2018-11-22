@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fresh Tomatoes!</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 80px;
+        }
+        #trailer .modal-dialog {
+            margin-top: 200px;
+            width: 640px;
+            height: 480px;
+        }
+        .hanging-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            z-index: 9001;
+        }
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+        .movie-tile {
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+        .movie-tile:hover {
+            background-color: #EEE;
+            cursor: pointer;
+        }
+        .scale-media {
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: white;
+        }
+        // This will allow the popover to be the same width as the tile.
+        .popover{
+            max-width: 100%; /* Max Width of the popover (depending on the container!) */
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
+            // Remove the src so the player itself gets removed, as this is the only
+            // reliable way to ensure the video stops playing in IE
+            $("#trailer-video-container").empty();
+        });
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.movie-tile', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });
+        // Animate in the movies when the page loads
+        $(document).ready(function () {
+          $('.movie-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
+        // popover box to display the movie information such as title, rating and storyline.It will be attached to an Info button.
+        $(document).ready(function(){
+        $('[data-toggle="popover"]').popover({placement:"top"});   
+});
+    </script>
+</head>
+
+  <body>
+    <!-- Trailer Video Modal -->
+    <div class="modal" id="trailer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
+            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+          </a>
+          <div class="scale-media" id="trailer-video-container">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Page Content -->
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers - David's Favorites!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="KYz2wyBy3kc" data-toggle="modal" data-target="#trailer" >
+    <img src="https://m.media-amazon.com/images/M/MV5BMDU2ZWJlMjktMTRhMy00ZTA5LWEzNDgtYmNmZTEwZTViZWJkXkEyXkFqcGdeQXVyNDQ2OTk4MzI@._V1_SY1000_SX670_AL_.jpg" width="220" height="342">
+    <h2>Toy Story</h2><button type="button" class="btn btn-info btn-xs" title="Toy Story - G" data-toggle="popover" data-trigger="hover" data-html="true" data-content= "A story of a boy and his toys come to life.<br /><br />(Click Info or Poster image to play the movie trailer.)">Info</button>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="5PSNL1qE6VY" data-toggle="modal" data-target="#trailer" >
+    <img src="https://m.media-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_.jpg" width="220" height="342">
+    <h2>Avatar</h2><button type="button" class="btn btn-info btn-xs" title="Avatar - PG-13" data-toggle="popover" data-trigger="hover" data-html="true" data-content= "A marine on an alien planet.<br /><br />(Click Info or Poster image to play the movie trailer.)">Info</button>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="i1CPsVNUAG8" data-toggle="modal" data-target="#trailer" >
+    <img src="https://m.media-amazon.com/images/M/MV5BYzg5YmUyNGMtMThiNS00MjA2LTgwZDctNDlhM2RkZDNmZmRkXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SY1000_CR0,0,671,1000_AL_.jpg" width="220" height="342">
+    <h2>True Lies</h2><button type="button" class="btn btn-info btn-xs" title="True Lies - R" data-toggle="popover" data-trigger="hover" data-html="true" data-content= "A fearless, globe-trotting, terrorist-battling secret agent has his life turned upside down when he discovers his wife might be having an affair with a used car salesman while terrorists smuggle nuclear war heads into the United States.<br /><br />(Click Info or Poster image to play the movie trailer.)">Info</button>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="x9f6JaaX7Wg" data-toggle="modal" data-target="#trailer" >
+    <img src="https://m.media-amazon.com/images/M/MV5BNzkxODk0NjEtYjc4Mi00ZDI0LTgyYjEtYzc1NDkxY2YzYTgyXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,666,1000_AL_.jpg" width="220" height="342">
+    <h2>Full Metal Jacket</h2><button type="button" class="btn btn-info btn-xs" title="Full Metal Jacket - R" data-toggle="popover" data-trigger="hover" data-html="true" data-content= "A pragmatic U.S. Marine observes the dehumanizing effects the Vietnam War has on his fellow recruits from their brutal boot camp training to the bloody street fighting in Hue.<br /><br />(Click Info or Poster image to play the movie trailer.)">Info</button>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="CUiCu-zuAgM" data-toggle="modal" data-target="#trailer" >
+    <img src="https://m.media-amazon.com/images/M/MV5BMjIxNjAzODQ0N15BMl5BanBnXkFtZTcwODY2MjMyNA@@._V1_SY1000_CR0,0,640,1000_AL_.jpg" width="220" height="342">
+    <h2>True Grit</h2><button type="button" class="btn btn-info btn-xs" title="True Grit - PG-13" data-toggle="popover" data-trigger="hover" data-html="true" data-content= "A stubborn teenager enlists the help of a tough U.S. Marshal to track down her father's murderer.<br /><br />(Click Info or Poster image to play the movie trailer.)">Info</button>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="bq0gp54818A" data-toggle="modal" data-target="#trailer" >
+    <img src="https://m.media-amazon.com/images/M/MV5BNGRlNjIwNzEtZjNlMi00YWJjLWI5ODctMjRmZDNlMzdhMTc0L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMjI4MjA5MzA@._V1_SY1000_CR0,0,659,1000_AL_.jpg" width="220" height="342">
+    <h2>Big Jake</h2><button type="button" class="btn btn-info btn-xs" title="Big Jake - PG-13" data-toggle="popover" data-trigger="hover" data-html="true" data-content= "In 1909, when John Fain's gang kidnaps Jacob McCandles' grandson and holds him for ransom, Big Jake sets out to rescue the boy.<br /><br />(Click Info or Poster image to play the movie trailer.)">Info</button>
+</div>
+
+    </div>
+  </body>
+</html>
