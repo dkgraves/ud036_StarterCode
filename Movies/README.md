@@ -62,4 +62,4 @@ Python ver 2.7.15, FireFox ver 60.1.0esr(32-bit) and Eclipse Oxygen(64) were
 
 ## ud036_StarterCode
 The original source code(fresh_tomatoes.py) for a Movie Trailer web site is
- located on GitHub. 
+ located in GitHub. 
