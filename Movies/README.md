@@ -57,9 +57,11 @@ If you wish to modify the movie content then you will need the following files
 	- Does not need to be modified to add or remove movies in entertainment.py.
 
 ## Environment
+
 Python ver 2.7.15, FireFox ver 60.1.0esr(32-bit) and Eclipse Oxygen(64) were
  used to create this program.
 
 ## ud036_StarterCode
+
 The original source code(fresh_tomatoes.py) for a Movie Trailer web site is
  located in GitHub. 
